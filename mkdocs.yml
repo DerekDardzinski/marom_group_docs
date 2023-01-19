@@ -1,6 +1,6 @@
 site_name: Marom Group Training Documentation
 site_description: Information required for onboarding in the Marom Quantum Materials research group.
-site_url: https://derekdardzinski.github.io/marom_group_docs
+site_url: https://derekdardzinski.io/marom_group_docs
 
 theme:
     name: 'material'
