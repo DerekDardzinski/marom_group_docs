@@ -1,8 +1,9 @@
-# Installing a Package Manager
+# Cluster Setup
+## Installing a Package Manager
 
 In this section we will learn to set up <a href="https://mamba.readthedocs.io/en/latest/index.htm" target="_blank">Mamba</a> which is a fast package manager that can be used to create virtual environments and install packages without root permisions.
 
-## Installing Mamba
+### Installing Mamba
 Go to <a href="https://github.com/conda-forge/miniforge#mambaforge" target="_blank">this site</a> and download the appropriate version of **Mambaforge** for you system (if you are setting it up on a cluster use the *Linux x86_64(amd64)* option). If you are installing on a cluster you can use the following command to download the install script.
 
 ```bash
@@ -51,18 +52,18 @@ source ~/.bashrc
 
 If this was succesfull you should have `(base)` in front of your command prompt.
 
-# Installing a Text Editor
-## Helix Text Editor
+## Installing a Text Editor
+### Helix Text Editor
 In most linux systems the default text editor is Vi/Vim/Nano. These are all either difficult to work in or difficult to configure. I would recommend installing the <a href="https://helix-editor.com/" target="_blank">Helix text editor</a> since it comes pre-installed with language-server functionalities and lots of nice themes.
 
-### Installing Rust
+#### Installing Rust
 I found that the most reliable way to install on our clusters is building it from source. The first step is to install `rust` using mamba
 
 ```bash
 mamba install rust
 ```
 
-### Downloading and Building the Source Code
+#### Downloading and Building the Source Code
 Now you can make a new directory in your home folder called `pkgs` and `cd` into it.
 
 ```bash
@@ -84,7 +85,7 @@ source ~/.bashrc
 
 This should give you a working helix installation and the editor can be opened using the command `hx`
 
-### Configuring Helix
+#### Configuring Helix
 A reasonable starting configuration is the following, and it can be inserted in the config file via:
 
 ```bash
@@ -120,7 +121,7 @@ g = { a = "code_action" } # Maps `ga` to show possible code actions
 
 Now you can reopen any file with `hx` and you should see a nice looking terminal-based text editor.
 
-### Adding Language-Servers and Auto-Formatters
+#### Adding Language-Servers and Auto-Formatters
 The last thing to do is install a python and bash language server so you can get autocomplete and linting and autoformatting:
 
 ```bash
@@ -148,8 +149,8 @@ Now you should have a working text editor with language support for python and b
 **It is important to reinstall the `python-lsp-server` and `black` packages in every new mamba environment that you make in order for autocomplete to work for the python packages that are installed in that environment.**
 
 
-# Configuring your Shell
-## Adding comands to the .bashrc
+## Configuring your Shell
+### Adding comands to the .bashrc
 The `.bashrc` file lives in your home directory and is the configuration file for you shell. Below are some commands that you can add to your `.bashrc` to make working in your shell a better experience than looking at plain white text in a terminal.
 
 ```bash
