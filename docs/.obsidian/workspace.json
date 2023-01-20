@@ -66,9 +66,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "031a7521a671a6b2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/Calculation Descriptions.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 5
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -118,8 +130,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "54def0a0ee6a71b6",
@@ -135,7 +146,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "notes/VASP Basics.md",
+                "file": "notes/Calculation Descriptions.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -152,7 +163,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "notes/VASP Basics.md",
+                "file": "notes/Calculation Descriptions.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -175,7 +186,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "notes/VASP Basics.md"
+                "file": "notes/Calculation Descriptions.md"
               }
             }
           }
@@ -196,8 +207,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "9841e436ec26a702",
+  "active": "031a7521a671a6b2",
   "lastOpenFiles": [
+    "notes/VASP Basics.md",
+    "notes/Calculation Descriptions.md",
     "notes/Cluster Setup.md",
     "index.md",
     "notes/Cluster Setup/Shell Configuration.md",
