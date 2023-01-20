@@ -1,3 +1,12 @@
+# potcar.sh
+The `potcar.py` file can be used to generate kpoints for all possible types of calculations that we do in the Marom group. To use it, copy the code block below and put it in `~/bin/potcar.py` then run:
+
+```bash
+chmod +x ~/bin/potcar.py
+```
+
+Additionally, you will need to add the path to your `potpaw_PBE` file which holds the VASP pseudopotential information.
+
 ```bash
 #!/bin/bash    
 # Create a GGA_PAW POTCAR file by concatenation of POTCAR files   

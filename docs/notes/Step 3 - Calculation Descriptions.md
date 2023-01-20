@@ -3,7 +3,7 @@ In this section we will discus the inputs you need in order to run all the diffe
 
 ## General Inputs
 ### INCAR
-As stated in [[VASP Basics]], the INCAR contains the set of instructions that tells VASP what type of  calculation to perform. Although we perform many different types of calculations, there are some standard parameters that we always use. Sometimes, we may choose to alter   the following parameters slightly, but for the vast majority of our calculations, these will remain constant.
+As stated in [[Step 2 - VASP Basics]], the INCAR contains the set of instructions that tells VASP what type of  calculation to perform. Although we perform many different types of calculations, there are some standard parameters that we always use. Sometimes, we may choose to alter   the following parameters slightly, but for the vast majority of our calculations, these will remain constant.
 
 ```txt
 ALGO = Fast      # Mixture of Davidson and RMM-DIIS algos

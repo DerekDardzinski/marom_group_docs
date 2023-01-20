@@ -1,3 +1,19 @@
+# incar.py
+The `incar.py` can be used to generate the INCAR for all of your calculations. To use it, copy the code block below and put it in `~/bin/incar.py` then run:
+
+```bash
+chmod +x ~/bin/incar.py
+```
+
+Lastly you will need to place your python interpreter path at the top of the file in order for it to work properly as an executible. You can find your path by running the command `which python`:
+
+```bash
+(base) usrname(cori) usrname/bin $ which python
+/global/homes/d/ddardzin/.local/miniconda3/bin/python
+```
+
+Additionally, you will need to add the path to your `potpaw_PBE` file which holds the VASP pseudopotential information.
+
 ```python
 #!/<PATH TO YOUR PYTHON INTERPETER>
 from pymatgen.io.vasp.inputs import Poscar

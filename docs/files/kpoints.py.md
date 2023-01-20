@@ -1,3 +1,17 @@
+# kpoints.py
+The `kpoints.py` file can be used to generate kpoints for all possible types of calculations that we do in the Marom group. To use it, copy the code block below and put it in `~/bin/kpoints.py` then run:
+
+```bash
+chmod +x ~/bin/kpoints.py
+```
+
+Lastly you will need to place your python interpreter path at the top of the file in order for it to work properly as an executible. You can find your path by running the command `which python`:
+
+```bash
+(base) usrname(cori) usrname/bin $ which python
+/global/homes/d/ddardzin/.local/miniconda3/bin/python
+```
+
 ```python
 #!/<PATH TO YOUR PYTHON INTERPETER>
 import numpy as np
