@@ -54,9 +54,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "9841e436ec26a702",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/VASP Basics.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -106,7 +118,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "54def0a0ee6a71b6",
@@ -122,7 +135,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "notes/Cluster Setup.md",
+                "file": "notes/VASP Basics.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -139,7 +152,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "notes/Cluster Setup.md",
+                "file": "notes/VASP Basics.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -162,7 +175,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "notes/Cluster Setup.md"
+                "file": "notes/VASP Basics.md"
               }
             }
           }
@@ -183,10 +196,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "37a2c2bb45f8ffd3",
+  "active": "9841e436ec26a702",
   "lastOpenFiles": [
-    "index.md",
     "notes/Cluster Setup.md",
+    "index.md",
     "notes/Cluster Setup/Shell Configuration.md",
     "notes/Cluster Setup/Installing a (good) Text Editor.md",
     "notes/Cluster Setup/Package Manager.md"

@@ -1,6 +1,7 @@
 # Cluster Setup
-## Installing a Package Manager
+In this section we will learn how to set up a proper development environment on a linux cluster.
 
+## Installing a Package Manager
 In this section we will learn to set up <a href="https://mamba.readthedocs.io/en/latest/index.htm" target="_blank">Mamba</a> which is a fast package manager that can be used to create virtual environments and install packages without root permisions.
 
 ### Installing Mamba
@@ -54,7 +55,7 @@ If this was succesfull you should have `(base)` in front of your command prompt.
 
 ## Installing a Text Editor
 ### Helix Text Editor
-In most linux systems the default text editor is Vi/Vim/Nano. These are all either difficult to work in or difficult to configure. I would recommend installing the <a href="https://helix-editor.com/" target="_blank">Helix text editor</a> since it comes pre-installed with language-server functionalities and lots of nice themes.
+In most linux systems the default text editor is Vi/Vim/Nano. These are all either difficult to work in or difficult to configure. I would recommend installing the <a href="https://helix-editor.com/" target="_blank">Helix text editor</a> since it comes pre-installed with language-server functionalities and lots of nice themes. If you aren't familiar with working in a vim-like editor try going through the tutorial after you install the editor `hx --tutor`.
 
 #### Installing Rust
 I found that the most reliable way to install on our clusters is building it from source. The first step is to install `rust` using mamba
@@ -95,7 +96,7 @@ hx ~/.config/helix/config.toml
 Copy and paste this into the config.toml file using `Ctrl-Shift-V`. Then you can run `:wq` to save and exit from the config file.
 
 ```toml
-theme = "catppuccin_mocha"
+theme = "catppuccin_mocha" # there are many options, this is just the one I like to use. Try :theme <TAB> to see all available themes.
 
 [editor]
 true-color = true
