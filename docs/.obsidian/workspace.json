@@ -83,12 +83,8 @@
             "id": "1676dc3c7cbdc67e",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "files/potcar.sh.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           },
           {
