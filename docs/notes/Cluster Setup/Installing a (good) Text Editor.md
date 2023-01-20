@@ -1,3 +1,4 @@
+# Installing the Helix Text Editor
 In most linux systems the default text editor is Vi/Vim/Nano. These are all either difficult to work in or difficult to configure. I would recommend installing the <a href="https://helix-editor.com/" target="_blank">Helix text editor</a> since it comes pre-installed with language-server functionalities and lots of nice themes.
 
 I found that the most reliable way to install on our clusters is building it from source. The first step is to install `rust` using mamba

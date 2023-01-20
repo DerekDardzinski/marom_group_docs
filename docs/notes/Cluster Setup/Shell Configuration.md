@@ -1,3 +1,4 @@
+# Shell Configuration
 The first thing we can do is to add some things to our `.bashrc` file, which is the configuration file for the shell in most linux systems.
 
 ```bash
