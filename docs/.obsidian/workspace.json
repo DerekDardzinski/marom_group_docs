@@ -11,36 +11,24 @@
             "id": "19c82bfa300e4e1a",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/Cluster Setup/Package Manager.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           },
           {
             "id": "924829ecb4bf1ed6",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/Cluster Setup/Package Manager.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           },
           {
             "id": "bf74ca08acca897e",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/Cluster Setup/Installing a (good) Text Editor.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           },
           {
@@ -54,9 +42,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "df12fd0621b452ab",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "index.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -183,10 +183,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "e657e4c63747a5fd",
+  "active": "37a2c2bb45f8ffd3",
   "lastOpenFiles": [
+    "notes/Cluster Setup.md",
+    "notes/Cluster Setup/Shell Configuration.md",
     "notes/Cluster Setup/Installing a (good) Text Editor.md",
     "notes/Cluster Setup/Package Manager.md",
-    "notes/Cluster Setup/Shell Configuration.md"
+    "index.md"
   ]
 }
