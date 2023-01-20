@@ -1,11 +1,12 @@
-#!/global/homes/d/ddardzin/.local/miniconda3/bin/python
+```python
+#!/<PATH TO YOUR PYTHON INTERPETER>
 from pymatgen.io.vasp.inputs import Poscar
 from pymatgen.io.vasp.outputs import Outcar
 import argparse
 import numpy as np
 import os
 
-POTCAR_PATH = '/global/homes/d/ddardzin/pseudopotential/potpaw_PBE/'
+POTCAR_PATH = '<PATH TO potpaw_PBE FOLDER>'
 
 incar_file = """
 # general (start)
@@ -430,3 +431,4 @@ else:
 
 with open(output, 'w') as out:
     out.write(new_incar)
+```
