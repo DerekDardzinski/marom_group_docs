@@ -59,9 +59,7 @@ LWAVE = False # Does not write the WAVECAR
 The following code can be used to generate the INCAR
 ```bash
 incar.py --scf
-```
 or
-```bash
 incar.py -s
 ```
 
@@ -76,14 +74,210 @@ Gamma
 ```
 
 To generate the KPOINTS file for a SCF calculation the kpoints.py file can be used.
+
 ```bash
 kpoints.py --grid --density 7 7 7
-```
 or
-```bash
 kpoints.py -g -d 7 7 7
 ```
 
 ## Density of States (DOS) Calculation
 ### INCAR
 In the INCAR there are eight important parameters beyond the general parameters. The only parameters that can be changed are NEDOS, EMIN, and EMAX. These values are used to determine the energy range to be calculated and how many points are included within the given energy range. By default, only 301 points are sampled for the density of states, and the energy range is unconstrained, so it includes the states with the lowest and highest energies. For the most part, we only care about a small range of energies around the Fermi energy, so we like to constrain the values between emin and emax.
+
+```txt
+ICHARG = 11     # Calculate eigenvalues from preconverged CHGCAR
+ISMEAR = -5     # Tetrahedron method with Blochl corrections
+LCHARG = False  # Does not write the CHG* files
+LWAVE = False   # Does not write the WAVECAR files 
+LORBIT = 11     # Projected data (lm-decomposed PROCAR)
+NEDOS = 3001    # 3001 points are sampled for the DOS
+EMIN = emin     # Minimum energy for the DOS plot
+EMAX = emax     # Maximum energy for the DOS plot
+```
+
+The actual values of emin and emax can be calculated manually by finding the Fermi energy from the OUTCAR of the SCF calculation and manually determining a range based on that value. For example, if it was only necessary to observe 3 eV above and below the Fermi energy, and the Fermi energy was -1 eV, then emin=-4 and emax=2 (Note that these are absolute energy values and not relative to the Fermi energy like how it is typically plotted). There is also a way to automate the determination of these values by adding the following lines of code to your submission script in your `scf` calculation.
+
+```bash
+fermi_str=$(grep 'E-fermi' OUTCAR)  
+fermi_array=($fermi_str)  
+efermi=${fermi_array[2]}  
+emin=`echo $efermi - 3 | bc -l`  
+emax=`echo $efermi + 3 | bc -l`  
+sed -i "s/EMIN = EMIN/EMIN = $emin/" ../dos/INCAR  
+sed -i "s/EMAX = EMAX/EMAX = $emax/" ../dos/INCAR
+```
+
+### KPOINTS
+The only difference between the KPOINTS file of a DOS calculation and that of a SCF calculation is that the grid should be denser. This is due to the fact that we want a very accurate energy evaluation for the density of states, so we choose a finer grid.
+
+```txt
+Automatic kpoint scheme  
+0  
+Gamma  
+15 15 15
+```
+
+o generate the KPOINTS file for a DOS calculation the [[kpoints.py]] file can again be used.
+
+```bash
+kpoints.py --grid --density 15 15 15
+or
+kpoints.py -g -d 15 15 15
+```
+
+## Band Structure Calculation (Band) Calculation
+In the INCAR there are five important parameters beyond the general parameters. The only parameters that can be changed are LWAVE and LORBIT. In the case of a calculation where it is desired to perform band unfolding the WAVECAR must be written (LWAVE=True). In the case where it is not important view the projected band structure (e.g. convergence tests) then the LORBIT tag can be removed.
+
+```txt
+ICHARG = 11     # Calculate eigenvalues from preconverged CHGCAR
+ISMEAR = 0      # Fermi smearing
+LCHARG = False  # Does not write the CHG* files
+LWAVE = False   # Does not write the WAVECAR file (True for unfolding)
+LORBIT = 11     # Projected data (lm-decomposed PROCAR)
+```
+
+To generate the INCAR for a Band calculation the [[incar.py]] file can be used.
+
+```bash
+incar.py --band
+or
+incar.py -b
+```
+
+### KPOINTS
+For a band structure calculation, the KPOINTS file can take on one of three forms: regular, HSE, or unfolded. The KPOINTS file for a regular calculation is the easiest to generate since all you need to specify is the location and labels of each high symmetry point. There are a variety of different ways to find the coordinates of the high symmetry points in a Brillouin zone, but one of the more convenient methods it to use SeeK-path where you just need to upload a POSCAR to the website and it will find and visualize the high symmetry points for you. The same algorithm used by this website is also implemented in the kpoints.py file and the following KPOINTS file can be generated using the following command:
+
+```bash
+kpoints.py --band --coords GXWLGK --segments 50
+or
+kpoints.py -b -c GXWLGK -n 50
+```
+
+The ouput of the above for a Zinc-Blende structure such as InAs will be:
+
+```txt
+band  
+50  
+Line-mode  
+reciprocal  
+0 0 0 ! G  
+0.5 0.0 0.5 ! X
+
+0.5 0.0 0.5 ! X  
+0.5 0.25 0.75 ! W 
+
+0.5 0.25 0.75 ! W  
+0.5 0.5 0.5 ! L  
+
+0.5 0.5 0.5 ! L  
+0 0 0 ! G  
+
+0 0 0 ! G  
+0.375 0.375 0.75 ! K
+```
+
+For an HSE calculation, the process is slightly more complicated since the KPOINTS must be explicitly defined and they must be appended to the end of a file from the SCF calculation that shows the coordinates of the k-points used to sample the irreducible Brillouin zone called the IBZKPT. Luckily, we have a script to easily generate this using the regular KPOINTS and IBZKPT files as inputs. Shown below are the top few lines of the HSE KPOINTS file. The lines where the 4th column is non-zero are from the IBZKPT file, and the lines where the 4th column is zero are the actual points along the k-path.
+
+```txt
+Automatically generated mesh  
+129  
+Reciprocal lattice  
+ 0.00000000000000 0.00000000000000 0.00000000000000 1  
+ 0.12500000000000 0.00000000000000 0.00000000000000 8  
+ 0.25000000000000 0.00000000000000 0.00000000000000 8  
+ 0.37500000000000 0.00000000000000 0.00000000000000 8  
+ 0.50000000000000 0.00000000000000 0.00000000000000 4  
+...  
+-0.37500000000000 0.37500000000000 0.12500000000000 48  
+-0.25000000000000 0.37500000000000 0.12500000000000 24  
+-0.37500000000000 0.50000000000000 0.12500000000000 12  
+-0.25000000000000 0.50000000000000 0.25000000000000 6  
+ 0.00000000000000 0.00000000000000 0.00000000000000 0  
+ 0.02631578947368 0.00000000000000 0.02631578947368 0  
+ 0.05263157894737 0.00000000000000 0.05263157894737 0  
+ 0.07894736842105 0.00000000000000 0.07894736842105 0
+```
+
+To generate the above file, it is as simple as running the kpoints.py file with the following commands:
+
+```bash
+kpoints.py --band --hse --coords GXWLGK --ibzkpt ../scf/IBZKPT
+or
+kpoints.py -b -e -c GXWLGK -i ../scf/IBZKPT
+```
+
+Last, but certainly not least there is the KPOINTS file for an unfolded band structure calculation (more details about unfolding later). This is the most involved calculation to set up, but our group has developed many tools to make the setup relatively easy. The format of the KPOINTS file is similar to that of the HSE calculation because the k-points are explicitly listed, but the IBZKPT part is not shown.
+
+```txt
+kpoints generated by PYVASPWFC  
+41  
+Rec  
+	0.00000000 -0.48333333 -0.46666667 1.0  
+	0.00000000 -0.46666667 0.06666667 1.0  
+	0.00000000 -0.45000000 -0.40000000 1.0  
+	0.00000000 -0.43333333 0.13333333 1.0  
+	0.00000000 -0.41666667 -0.33333333 1.0  
+	0.00000000 -0.40000000 0.20000000 1.0  
+	...
+```
+
+This file can be generated using the code below:
+
+```python
+from vaspvis.utils import generate_kpoints, convert_slab  
+
+M = convert_slab(  
+	bulk_path='POSCAR_bulk', # Path to bulk POSCAR file  
+	slab_path='POSCAR_slab', # Path to slab POSCAR file  
+	index=[1,1,1], # Miller indices of the surface  
+	generate=False, # Does not generate a converted POSCAR  
+)  
+hsp = [  
+	[2/3, 1/3, 1/3], # K/3  
+	[0.0, 0.0, 0.0], # Gamma  
+	[2/3, 1/3, 1/3], # K/3  
+]  
+generate_kpoints(  
+	M=M, # Transformation matrix  
+	high_symmetry_points=hsp, # High symmetry points  
+	n=40, # Number of k-points between each high symmetry point  
+	output='KPOINTS_unfolded' # Output file name  
+)
+```
+
+### POSCAR
+For an unfolded band structure calculation, a rotation must be applied to the lattice vectors of the unit cell in order for the transformation matrix to be an integer matrix (necessary for our unfolding code). The following code is an example of how to generate a converted POSCAR for an unfolded band structure calculation.
+
+```python
+from vaspvis.utils import generate_kpoints, convert_slab  
+
+M = convert_slab(  
+	bulk_path='POSCAR_bulk', # Path to bulk POSCAR file  
+	slab_path='POSCAR_slab', # Path to slab POSCAR file  
+	index=[1,1,1], # Miller indices of the surface  
+	generate=False, # Does not generate a converted POSCAR  
+)  
+```
+
+The output of the code will result in the following, where the difference between the tops of the regular and converted POSCAR’s can be clearly seen.
+
+```txt
+In116 As120 H4  
+1.0  
+4.283936 -7.419994 0.000000  
+4.283936 7.419994 0.000000  
+0.000000 0.000000 146.908393  
+In As H  
+115 116 4
+```
+
+```txt
+In115 As116 H4  
+1.0  
+-0.000000 -6.058400 6.058400  
+-6.058400 6.058400 0.000000  
+-84.817600 -84.817600 -84.817600  
+In As H  
+115 116 4
+```

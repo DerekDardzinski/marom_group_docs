@@ -150,8 +150,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "54def0a0ee6a71b6",
@@ -230,15 +229,15 @@
   },
   "active": "8d92b772cd6e8c93",
   "lastOpenFiles": [
+    "notes/files/incar.py.md",
+    "notes/Step 3 - Calculation Descriptions.md",
     "notes/Step 1 - Cluster Setup.md",
     "notes/Step 2 - VASP Basics.md",
-    "notes/Step 3 - Calculation Descriptions.md",
     "files/incar.py.md",
     "files/potcar.sh.md",
     "files/kpoints.py.md",
     "files/incar.md",
     "index.md",
-    "notes/Cluster Setup/Shell Configuration.md",
-    "notes/Cluster Setup/Installing a (good) Text Editor.md"
+    "notes/Cluster Setup/Shell Configuration.md"
   ]
 }
