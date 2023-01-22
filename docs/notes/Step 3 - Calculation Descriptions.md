@@ -281,3 +281,123 @@ In115 As116 H4
 In As H  
 115 116 4
 ```
+
+## Structure Optimization (OPT)
+Structural optimization calculations are mostly used to relax atoms at a surface or at an interface.
+
+### INCAR
+In the INCAR there are six important parameters beyond the general parameters. The first four parameters are essentially the same as an SCF calculation except for the fact that we typically do not write the CHG or CHGCAR files because we do not use them for anything after the OPT calculation in finished. The only parameter that can be changed is NSW which is the total number of ionic steps to be taken. Typically 50 ionic steps is more than enough, but is some cases this might need to be increased.
+
+```txt
+ICHARG = 2      # Generate CHG* from a superposition of atomic charge densities
+ISMEAR = 0      # Fermi smearing
+LCHARG = False  # Does not write the CHG* files
+LWAVE = False   # Does not write the WAVECAR
+IBRION = 2      # Ionic relaxation
+NSW = 50        # Maximum of 50 ionic steps
+```
+
+To generate the INCAR for a OPT calculation the incar.py file can be used.
+
+```bash
+incar.py --opt
+or
+incar.py -o
+```
+
+### KPOINTS
+The KPOINTS file for an OPT calculation is the same as a KPOINTS file for an SCF calculation.
+
+### POSCAR
+For a structural optimization calculation, a few changes must be made to the POSCAR file to enable what is called selective dynamics. In the 8th line “Selective dynamics” must be included in order for VASP to understand that only certain atoms should be shifted. Then, after each line with atomic coordinates, three Boolean statements (T or F) must be added to determine if the atom can shift and which Cartesian direction(s) it is confined to. An example is shown below where the pseudohydrogen positions of an InSb(110) slab are relaxed in the z-direction only and all other atoms are constrained.
+
+```txt
+In14 Sb14 H4  
+1.0  
+4.581628 0.000000 0.000000  
+0.000000 6.479400 0.000000  
+0.000000 0.000000 94.362208  
+In Sb H H  
+14 14 2 2  
+Selective dynamics  
+direct  
+0.500000 0.500000 0.657799 F F F In  
+0.000000 0.000000 0.633522 F F F In  
+...  
+0.000000 0.750000 0.657799 F F F Sb  
+0.500000 0.250000 0.633522 F F F Sb  
+...  
+0.500000 0.386331 0.328962 F F T H  
+0.000000 0.886331 0.671038 F F T H  
+0.000000 0.861263 0.328728 F F T H  
+0.500000 0.361263 0.671272 F F T H
+```
+
+## Adding DFT+U to a Calculation
+Adding DFT+U is necessary for most calculations involving semiconductors because it corrects for the massive underestimate of the band gap with GGA. Our group has developed a method to predict the effective U value using Bayesian optimization by tuning the effective U parameters to best match the PBE+U band structure to the band structure calculated with HSE. A full example of how to run the Bayesian optimization code will be included in a following section for InAs.
+
+### INCAR
+In the INCAR there are six important parameters beyond the general parameters. The only parameters that need to be changed are the ones for LDAUL, which determine the orbitals that the U value is applied, and LDAUU, which is where the actual effective U values are entered.
+
+```txt
+LDAU = True       # Determines if DFT+U is used
+LDAUTYPE = 2      # Dudarev formulation
+LDAUL = 1 1       # l-quantum number to apply the U-value on (-1 turns it off)
+LDAUU = -0.5 -7.5 # Effective U-value for each species
+LDAUJ = 0.0 0.0   # J-value (Always zero for Dudarev method)
+LMAXMIX = 4       # Max l-quantum number for charge density mixing
+```
+
+To generate the INCAR for a DFT+U calculation, the incar.py file can be used. Below is an example for generating an INCAR for an SCF calculation with DFT+U.
+
+```bash
+incar.py --scf --dftu
+or
+incar.py -s -u
+```
+
+## Adding Spin-Orbit Coupling (SOC) to a Calculation
+Adding spin orbit coupling is very important for most of the materials that we study in the group because it models the spin-orbit interactions between electrons.
+
+### INCAR
+In the INCAR there are two important parameters beyond the general parameters. The only parameter that needs to change is the `MAGMOM` parameter which defines the magnetic moment for each atom in the x, y, and z directions. The example shown below is for a bulk InAs calculation where there are only two atoms in the unit cell. Since both In and As have no magnetic moment, $m_x$, $m_y$, and $m_z$ are all 0.
+
+```txt
+LSORBIT = True                    # Turn on spin-orbit coupling
+MAGMOM = 0 0 0 0 0 0  # Set the magnetic moment for each atom (3 for each atom)
+or
+MAGMOM = 6*0
+```
+
+To generate the INCAR for an SOC calculation, the incar.py file can be used. Below is an example for generating an INCAR for an SCF calculation with SOC
+
+```bash
+incar.py --scf --soc
+or
+incar.py -s -c
+```
+
+```txt
+# general 
+ALGO = Fast     # Mixture of Davidson and RMM-DIIS algos
+PREC = N        # Normal precision
+EDIFF = 1e-5    # Convergence criteria for electronic converge
+NELM = 500      # Max number of electronic steps
+ENCUT = 400     # Cut off energy
+LASPH = True    # Include non-spherical contributions from gradient corrections
+NBANDS = nbands    # Number of bands to include in the calculation
+BMIX = 3        # Mixing parameter for convergence
+AMIN = 0.01     # Mixing parameter for convergence 
+SIGMA = 0.05    # Width of smearing in eV
+
+# parallelization
+KPAR = 8        # The number of k-points to be treated in parallel
+NCORE = 8        # The number of bands to be treated in parallel
+
+# scf 
+ICHARG = 2      # Generate CHG* from a superposition of atomic charge densities
+ISMEAR = 0      # Fermi smearing
+LCHARG = True   # Write the CHG* files
+LWAVE = False   # Does not write the WAVECAR
+LREAL = Auto    # Automatically chooses rea/reciprocal space for projections
+```
