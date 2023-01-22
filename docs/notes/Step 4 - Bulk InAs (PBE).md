@@ -2,12 +2,12 @@
 In this step we will run our first calculation on bulk InAs
 
 ## Folder Layout
-	-`basic_training`
-		- `InAs_bulk`
-			- `pbe`
-				- `scf`
-				- `band`
-				- `dos`
+- `basic_training`
+	- `InAs_bulk`
+		- `pbe`
+			- `scf`
+			- `band`
+			- `dos`
 
 ## Basic Steps
 1. Run the SCF Calculations in the `scf` folder.
