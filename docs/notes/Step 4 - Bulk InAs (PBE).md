@@ -92,3 +92,7 @@ LCHARG = True   # Write the CHG* files
 LWAVE = False   # Does not write the WAVECAR
 LREAL = Auto    # Automatically chooses rea/reciprocal space for projections
 ```
+
+## Band Structure Calculation
+
+![pbe_band_structure](../assets/img/pbe_bands_plot.png)
