@@ -1,21 +1,25 @@
 # incar.py
-The `incar.py` can be used to generate the INCAR for all of your calculations. To use it, copy the code block below and put it in `~/bin/incar.py` then run:
+The `incar.py` can be used to generate the INCAR for all of your calculations. To use it, copy the code block below and put it in `~/bin/incar.py` then run the following command to add a <a href="https://en.wikipedia.org/wiki/Shebang_(Unix)" target="_blank">Shebang</a> line to the top of the `incar.py` file which tells your system which python interpreter to use when you make the file executable. 
+
+```bash
+sed -i '1s,.*,'"#\!$(which python)"',' ~/bin/incar.py
+```
+
+This should append something like the following to the top of the `incar.py` file:
+
+```txt
+#!/global/homes/d/ddardzin/.local/mambaforge/bin/python
+```
+
+Now you can make the `incar.py` file and executable file by running the following command.
 
 ```bash
 chmod +x ~/bin/incar.py
 ```
 
-Lastly you will need to place your python interpreter path at the top of the file in order for it to work properly as an executible. You can find your path by running the command `which python`:
-
-```bash
-(base) usrname(cori) usrname/bin $ which python
-/global/homes/d/ddardzin/.local/miniconda3/bin/python
-```
-
-Additionally, you will need to add the path to your `potpaw_PBE` file which holds the VASP pseudopotential information.
+Lastly, you will need to add the path to your `potpaw_PBE` file which holds the VASP pseudopotential information. 
 
 ```python
-#!/<PATH TO YOUR PYTHON INTERPETER>
 from pymatgen.io.vasp.inputs import Poscar
 from pymatgen.io.vasp.outputs import Outcar
 import argparse
@@ -23,6 +27,9 @@ import numpy as np
 import os
 
 POTCAR_PATH = '<PATH TO potpaw_PBE FOLDER>'
+
+# For example, mine looks like this:
+# POTCAR_PATH = '/global/homes/d/ddardzin/pseudopotential/potpaw_PBE/'
 
 incar_file = """
 # general (start)

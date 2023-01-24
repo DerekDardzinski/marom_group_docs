@@ -53,6 +53,16 @@ source ~/.bashrc
 
 If this was succesfull you should have `(base)` in front of your command prompt.
 
+### Installing important packages
+Run the following commands to install the main packages that we work with into your base environment. These are required for the `incar.py`, `kpoints.py`, and <a href="https://vaspvis.readthedocs.io/en/latest/modules.html" target="_blank">VaspVis</a> (our data visualization tool) to work.
+
+```bash
+mamba install pymatgen ase 
+pip install vaspvis
+```
+
+Now you should be all set to setup calculations, and visualize the data.
+
 ## Installing a Text Editor
 ### Helix Text Editor
 In most linux systems the default text editor is Vi/Vim/Nano. These are all either difficult to work in or difficult to configure. I would recommend installing the <a href="https://helix-editor.com/" target="_blank">Helix text editor</a> since it comes pre-installed with language-server functionalities and lots of nice themes. If you aren't familiar with working in a vim-like editor try going through the tutorial after you install the editor `hx --tutor`.

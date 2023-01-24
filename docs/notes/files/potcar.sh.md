@@ -11,6 +11,9 @@ Additionally, you will need to add the path to your `potpaw_PBE` file which hold
 #!/bin/bash    
 # Create a GGA_PAW POTCAR file by concatenation of POTCAR files   
 # Define local potpaw_GGA pseudopotential repository:
+# For example, mine looks like this:
+# repo='/global/homes/d/ddardzin/pseudopotential/potpaw_PBE'
+# Note that the trailing slash is not included, make sure yours doesn't end in /
 repo="<PATH TO potpaw_PBE FOLDER>"
 
 # Check if older version of POTCAR is present

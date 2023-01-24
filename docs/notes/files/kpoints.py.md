@@ -1,19 +1,24 @@
 # kpoints.py
-The `kpoints.py` file can be used to generate kpoints for all possible types of calculations that we do in the Marom group. To use it, copy the code block below and put it in `~/bin/kpoints.py` then run:
+The `kpoints.py` file can be used to generate kpoints for all possible types of calculations that we do in the Marom group. To use it, copy the code block below and put it in `~/bin/kpoints.py`, then run the following command to add a <a href="https://en.wikipedia.org/wiki/Shebang_(Unix)" target="_blank">Shebang</a> line to the top of the `kpoints.py` file which tells your system which python interpreter to use when you make the file executable. 
 
 ```bash
-chmod +x ~/bin/kpoints.py
+sed -i '1s,.*,'"#\!$(which python)"',' ~/bin/kpoints.py
 ```
 
-Lastly you will need to place your python interpreter path at the top of the file in order for it to work properly as an executible. You can find your path by running the command `which python`:
+This should append something like the following to the top of the `kpoints.py` file:
+
+```txt
+#!/global/homes/d/ddardzin/.local/mambaforge/bin/python
+```
+
+Now you can make the `kpoints.py` file and executable file by running the following command.
 
 ```bash
-(base) usrname(cori) usrname/bin $ which python
-/global/homes/d/ddardzin/.local/miniconda3/bin/python
+chmod +x ~/bin/incar.py
 ```
+
 
 ```python
-#!/<PATH TO YOUR PYTHON INTERPETER>
 import numpy as np
 from pymatgen.core.structure import Structure
 from pymatgen.symmetry.kpath import KPathSeek
