@@ -47,7 +47,7 @@ ICHARG = 2      # Generate CHG* from a superposition of atomic charge densities
 ISMEAR = 0      # Fermi smearing
 LCHARG = lcharg   # Write the CHG* files
 LWAVE = False   # Does not write the WAVECAR
-LREAL = Auto    # Automatically chooses rea/reciprocal space for projections
+LREAL = Auto    # Automatically chooses real/reciprocal space for projections
 # scf (end)
 
 # opt (start)
