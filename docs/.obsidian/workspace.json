@@ -30,9 +30,33 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "5837bf85dc567cf1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/Step 5 - Bulk InAs (PBE+SOC).md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "9e89382c53744771",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/Step 6 - Bulk InAs (HSE).md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -82,8 +106,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "54def0a0ee6a71b6",
@@ -99,7 +122,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "notes/Step 4 - Bulk InAs (PBE).md",
+                "file": "notes/Step 6 - Bulk InAs (HSE).md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -116,7 +139,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "notes/Step 4 - Bulk InAs (PBE).md",
+                "file": "notes/Step 6 - Bulk InAs (HSE).md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -139,7 +162,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "notes/Step 4 - Bulk InAs (PBE).md"
+                "file": "notes/Step 6 - Bulk InAs (HSE).md"
               }
             }
           }
@@ -160,17 +183,17 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "cf1ad309f300c3e4",
+  "active": "9e89382c53744771",
   "lastOpenFiles": [
-    "notes/Step 3 - Calculation Descriptions.md",
     "notes/Step 4 - Bulk InAs (PBE).md",
+    "notes/Step 6 - Bulk InAs (HSE).md",
+    "notes/Step 3 - Calculation Descriptions.md",
+    "notes/Step 5 - Bulk InAs (PBE+SOC).md",
     "notes/files/incar.py.md",
     "notes/Step 1 - Cluster Setup.md",
     "notes/Step 2 - VASP Basics.md",
     "files/incar.py.md",
     "files/potcar.sh.md",
-    "files/kpoints.py.md",
-    "files/incar.md",
-    "index.md"
+    "files/kpoints.py.md"
   ]
 }

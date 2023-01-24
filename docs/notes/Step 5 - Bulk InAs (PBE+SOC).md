@@ -1,10 +1,10 @@
-# Bulk InAs (PBE)
-In this step we will run our first calculation on bulk InAs
+# Bulk InAs (PBE+SOC)
+In this step we will run our second calculation on bulk InAs where we add in spin-orbit couple to make our calculation more accurate.
 
 ## Folder Layout
 - `basic_training`
 	- `InAs_bulk`
-		- `pbe`
+		- `pbe-soc`
 			- `scf`
 			- `band`
 			- `dos`
@@ -73,7 +73,7 @@ for d in dirs:
     shutil.copy("POSCAR", join(d, "POSCAR"))
 
     os.chdir(d)
-    os.system(f"incar.py --{d} --kpar 8 --ncore 8")
+    os.system(f"incar.py --{d} -c --kpar 8 --ncore 8")
     os.system("potcar.sh In As")
 
     if d == "scf":
@@ -90,7 +90,7 @@ And it can be submitted to the cluster using the following script.
 
 ```bash
 #!/bin/bash -l
-#SBATCH -J pbe # Job name
+#SBATCH -J pbe-soc # Job name
 #SBATCH -N 1  # Number of nodes
 #SBATCH -o stdout # File to which STDOUT will be written %j is the job #
 #SBATCH -t 30
@@ -128,9 +128,9 @@ The first step in any calculation is to perform the SCF calculation. In this sec
 As shown in section [[Step 3 - Calculation Descriptions]] the INCAR for an SCF calculation can be generated using the incar.py file.
 
 ```bash
-incar.py --scf
+incar.py --scf --soc
 or
-incar.py -s
+incar.py -s -c
 ```
 
 This results in the following file.
@@ -143,7 +143,7 @@ EDIFF = 1e-5    # Convergence criteria for electronic converge
 NELM = 500      # Max number of electronic steps
 ENCUT = 400     # Cut off energy
 LASPH = True    # Include non-spherical contributions from gradient corrections
-NBANDS = 12    # Number of bands to include in the calculation
+NBANDS = 24    # Number of bands to include in the calculation
 BMIX = 3        # Mixing parameter for convergence
 AMIN = 0.01     # Mixing parameter for convergence
 SIGMA = 0.05    # Width of smearing in eV
@@ -158,6 +158,10 @@ ISMEAR = 0      # Fermi smearing
 LCHARG = True   # Write the CHG* files
 LWAVE = False   # Does not write the WAVECAR
 LREAL = Auto    # Automatically chooses real/reciprocal space for projections
+
+# soc 
+LSORBIT = True  # Turn on spin-orbit coupling
+MAGMOM = 6*0 # Set the magnetic moment for each atom (3 for each atom)
 ```
 
 ## Density of States Calculation
@@ -167,9 +171,9 @@ After the SCF calculation is finished, the CHG and CHGCAR files can be copied to
 The INCAR for a DOS calculation can be generated using the incar.py file.
 
 ```bash
-incar.py --dos
+incar.py --dos --soc
 or
-incar.py -d
+incar.py -d -c
 ```
 
 Which results in the following file. The values of EMIN and EMAX were automatically  determined using the code shown in section [[Step 3 - Calculation Descriptions]].
@@ -182,7 +186,7 @@ EDIFF = 1e-5    # Convergence criteria for electronic converge
 NELM = 500      # Max number of electronic steps
 ENCUT = 400     # Cut off energy
 LASPH = True    # Include non-spherical contributions from gradient corrections
-NBANDS = 12    # Number of bands to include in the calculation
+NBANDS = 24    # Number of bands to include in the calculation
 BMIX = 3        # Mixing parameter for convergence
 AMIN = 0.01     # Mixing parameter for convergence 
 SIGMA = 0.05    # Width of smearing in eV
@@ -200,6 +204,10 @@ LORBIT = 11     # Projected data (lm-decomposed PROCAR)
 NEDOS = 3001    # 3001 points are sampled for the DOS
 EMIN = -3.7174     # Minimum energy for the DOS plot
 EMAX = 10.2826     # Maximum energy for the DOS plot
+
+# soc 
+LSORBIT = True  # Turn on spin-orbit coupling
+MAGMOM = 6*0 # Set the magnetic moment for each atom (3 for each atom)
 ```
 
 ### KPOINTS
@@ -214,7 +222,7 @@ kpoints.py -g -d 15 15 15
 ### Results
 Once the calculation is completed, VaspVis can be used to visualize the density of states plots. The following code shows how to easily generate two DOS plots which will be saved as `dos_plain.png` and `dos_spd.png` which are shown below
 
-![pbe_dos](../assets/img/pbe_dos_plot.png)
+![pbe_dos](../assets/img/pbe-soc_dos_plot.png)
 
 ## Band Structure Calculation
 After the SCF calculation is finished, the CHG and CHGCAR files can be copied to the folder with the Band calculation files. For a more detailed breakdown of the Band calculation see section [[Step 3 - Calculation Descriptions]].
@@ -223,9 +231,9 @@ After the SCF calculation is finished, the CHG and CHGCAR files can be copied to
 The INCAR for a band structure calculation can be generated using the incar.py file.
 
 ```bash
-incar.py --band
+incar.py --band --soc
 or
-incar.py -b
+incar.py -b -c
 ```
 
 Which results in the following file:
@@ -238,7 +246,7 @@ EDIFF = 1e-5    # Convergence criteria for electronic converge
 NELM = 500      # Max number of electronic steps
 ENCUT = 400     # Cut off energy
 LASPH = True    # Include non-spherical contributions from gradient corrections
-NBANDS = 12    # Number of bands to include in the calculation
+NBANDS = 24    # Number of bands to include in the calculation
 BMIX = 3        # Mixing parameter for convergence
 AMIN = 0.01     # Mixing parameter for convergence 
 SIGMA = 0.05    # Width of smearing in eV
@@ -253,6 +261,10 @@ ISMEAR = 0      # Fermi smearing
 LCHARG = False  # Does not write the CHG* files
 LWAVE = False   # Does not write the WAVECAR files (True for unfolding)
 LORBIT = 11     # Projected data (lm-decomposed PROCAR)
+
+# soc 
+LSORBIT = True  # Turn on spin-orbit coupling
+MAGMOM = 6*0 # Set the magnetic moment for each atom (3 for each atom)
 ```
 
 ### KPOINTS
@@ -290,10 +302,11 @@ Reciprocal
 ### Results
 Once the calculation is completed, VaspVis can be used to visualize the band structure plots. The following code shows how to easily generate two band structure plots which will be saved as `band_plain.png` and `band_spd.png` which are shown below:
 
-![pbe_band_structure](../assets/img/pbe_bands_plot.png)
+![pbe_band_structure](../assets/img/pbe-soc_bands_plot.png)
 
 ## Concluding Notes
 Some things to note about the results:
-- This calculation was very fast, it only took about 11 seconds for the SCF calculation, 10 seconds for the band calculation, and 8 seconds for the DOS calculation using 1 node on the NERSC Cori machine.
-- PBE is predicting InAs to be a metal (no band gap) even though we know from experiments that is it a small band gap semiconductor with a band gap of ~0.35 eV.
+- This calculation was a bit slower than the calculation without PBE. It took about 35 seconds for the SCF calculation, 30 seconds for the band calculation, and 30 seconds for the DOS calculation using 1 node on the NERSC Cori machine. 
+- PBE+SOC is still predicting InAs to be a metal (no band gap) even though we know from experiments that is it a small band gap semiconductor with a band gap of ~0.35 eV.
 	- This is a common error for DFT as it underestimates the band gap due to the self interaction error. We will look at ways to fix this this in future calculation.
+	- SOC can usually increase the size of the band gap, but for small band gap semiconductors, just adding SOC isn't enough.
