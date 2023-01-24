@@ -185,10 +185,10 @@
   },
   "active": "9e89382c53744771",
   "lastOpenFiles": [
-    "notes/Step 4 - Bulk InAs (PBE).md",
-    "notes/Step 6 - Bulk InAs (HSE).md",
-    "notes/Step 3 - Calculation Descriptions.md",
     "notes/Step 5 - Bulk InAs (PBE+SOC).md",
+    "notes/Step 6 - Bulk InAs (HSE).md",
+    "notes/Step 4 - Bulk InAs (PBE).md",
+    "notes/Step 3 - Calculation Descriptions.md",
     "notes/files/incar.py.md",
     "notes/Step 1 - Cluster Setup.md",
     "notes/Step 2 - VASP Basics.md",

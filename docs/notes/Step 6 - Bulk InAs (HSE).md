@@ -228,7 +228,7 @@ kpoints.py -g -d 11 11 11
 ### Results
 Once the calculation is completed, VaspVis can be used to visualize the density of states plots. The following code shows how to easily generate two DOS plots which will be saved as `dos_plain.png` and `dos_spd.png` which are shown below
 
-![pbe_dos](../assets/img/pbe-soc_dos_plot.png)
+![pbe_dos](../assets/img/hse_dos_plot.png)
 
 ## Band Structure Calculation
 After the SCF calculation is finished, the WAVECAR file can be copied to the folder with the Band calculation files. For a more detailed breakdown of the Band calculation see section [[Step 3 - Calculation Descriptions]].
