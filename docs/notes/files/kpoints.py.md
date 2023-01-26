@@ -253,5 +253,4 @@ elif list_coords:
 else:
     raise BaseException(
         "NO FILE WRITTEN: Please make sure to select an option (hse, band, grid, list), runkpoints.py -h for more information.")
-(
 ```
