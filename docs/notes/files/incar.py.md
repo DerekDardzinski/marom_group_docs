@@ -401,9 +401,9 @@ if os.path.isfile(poscar):
     nbands_2 = int(1.2 * (natoms * nelect).sum()) + addbands
 
     if args.soc:
-        nbands = int(np.max([nbands_1, nbands_2]))
+        nbands = int(np.max([nbands_1, nbands_2, 24]))
     else:
-        nbands = int(0.5*np.max([nbands_1, nbands_2]))
+        nbands = int(0.5*np.max([nbands_1, nbands_2, 24]))
 
     new_incar = new_incar.replace('NBANDS = nbands', f'NBANDS = {nbands}')
 
